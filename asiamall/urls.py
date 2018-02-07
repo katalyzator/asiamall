@@ -12,7 +12,8 @@ urlpatterns = [
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/main/', include('main.urls')),
-    url(r'^api/shops/', include('shops.urls')),
+    url(r'^api/shop/', include('shops.urls')),
+    url(r'^api/children/', include('childrens.urls')),
     url(r'^api/news/', include('news.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^documentation/$', schema_view)
