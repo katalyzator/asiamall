@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'main',
     'shops',
+    'news',
+    'childrens',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
