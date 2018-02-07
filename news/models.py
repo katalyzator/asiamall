@@ -8,7 +8,8 @@ from django.utils.encoding import smart_unicode
 
 class News(models.Model):
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
-    image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости')
+    image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости', blank=True, null=True)
+    video = models.CharField(max_length=1000, verbose_name='Видео ссылка с YouTube', blank=True, null=True)
 
     text = RichTextUploadingField(verbose_name='Контент новости')
 
