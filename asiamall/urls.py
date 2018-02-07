@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^api/children/', include('childrens.urls')),
     url(r'^api/news/', include('news.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^documentation/$', schema_view)
+    url(r'^documentation/$', schema_view),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -29,7 +29,7 @@ class Shop(models.Model):
     time_end = models.TimeField(blank=True, null=True, verbose_name=_("Время окончание работы"))
     image = models.ImageField(upload_to='images/shops', verbose_name=_("Картинка"))
     category = models.ManyToManyField(Category, verbose_name=_("Выберите категорию"), related_name='shop_category',
-                                      blank=True, null=True)
+                                      blank=True)
 
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
