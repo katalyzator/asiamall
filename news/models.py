@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import urlparse
+
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.encoding import smart_unicode
@@ -23,3 +25,12 @@ class News(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+    def save(self, *args, **kwargs):
+        if self.video:
+            url_data = urlparse.urlparse(self.video)
+            query = urlparse.parse_qs(url_data.query)
+            video = query["v"][0]
+            self.video_img = 'https://img.youtube.com/vi/' + video + '/0.jpg'
+            print self.video_img
+        super(News, self).save(*args, **kwargs)
