@@ -11,9 +11,9 @@ from django.utils.encoding import smart_unicode
 class News(models.Model):
 
     NEWS_TAG = (
-        ('actual', 'Актульно'),
-        ('hot', 'Горячее'),
-        ('notify', 'Оповещение')
+        ('Актульно', 'Актульно'),
+        ('Горячее', 'Горячее'),
+        ('Оповещение', 'Оповещение')
     )
 
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
