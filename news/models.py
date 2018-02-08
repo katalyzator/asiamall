@@ -9,7 +9,6 @@ from django.utils.encoding import smart_unicode
 
 
 class News(models.Model):
-
     NEWS_TAG = (
         ('Актульно', 'Актульно'),
         ('Горячее', 'Горячее'),

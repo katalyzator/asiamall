@@ -24,7 +24,7 @@ SECRET_KEY = 'rxv64j^*i%9+ogoz#ga&za4=yid*ef#gy28zrj%@!1u(ld-=78'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'entertainments',
     'foodcourt',
     'services',
+    'promotions',
     'rest_framework_swagger',
     'ckeditor',
     'ckeditor_uploader',

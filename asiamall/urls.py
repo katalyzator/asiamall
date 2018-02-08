@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^api/shop/', include('shops.urls')),
     url(r'^api/children/', include('childrens.urls')),
     url(r'^api/news/', include('news.urls')),
+    url(r'^api/promotion/', include('promotions.urls')),
     url(r'^api/entertainment/', include('entertainments.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^documentation/$', schema_view),
