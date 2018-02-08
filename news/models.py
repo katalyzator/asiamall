@@ -9,10 +9,18 @@ from django.utils.encoding import smart_unicode
 
 
 class News(models.Model):
+
+    NEWS_TAG = (
+        ('actual', 'Актульно'),
+        ('hot', 'Горячее'),
+        ('notify', 'Оповещение')
+    )
+
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости', blank=True, null=True)
     video = models.CharField(max_length=1000, verbose_name='Видео ссылка с YouTube', blank=True, null=True)
     video_img = models.CharField(max_length=1000, editable=False, verbose_name='thumbnail')
+    tag = models.CharField(max_length=255, verbose_name='Тэг', choices=NEWS_TAG)
 
     text = RichTextUploadingField(verbose_name='Контент новости')
 
