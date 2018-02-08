@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import urlparse
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
@@ -19,6 +18,7 @@ class Promotion(models.Model):
     image = models.ImageField(upload_to='promotions/images', verbose_name='Главная картинка акции', blank=True,
                               null=True)
     tag = models.CharField(max_length=255, verbose_name='Тэг', choices=PROMOTION_TAG)
+    phone_number = models.CharField(max_length=255, verbose_name='Номер телефона')
 
     text = RichTextUploadingField(verbose_name='Контент акции')
 
