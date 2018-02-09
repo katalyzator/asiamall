@@ -27,8 +27,10 @@ def get_main_page_values(request):
             "result": {
                 "news": [{
                     "title": u"{}".format(new.title).encode("utf-8"),
-                    "image": (u"{}".format(new.image.url)).encode("utf-8") if new.image else None,
-                    "video": (u"{}".format(new.video.url)).encode("utf-8") if new.video else None,
+                    "image": (u"{}{}{}".format("http://", request.get_host(), new.image.url)).encode(
+                        "utf-8") if new.image else None,
+                    "video": (u"{}{}{}".format("http://", request.get_host(), new.video.url)).encode(
+                        "utf-8") if new.video else None,
                     "tag": u"{}".format(new.tag).encode("utf-8"),
                     "text": u"{}".format(new.text).encode("utf-8"),
                     "timestamp": u"{}".format(new.timestamp).encode("utf-8")
@@ -37,7 +39,7 @@ def get_main_page_values(request):
 
                 "promotions": [{
                     "title": u"{}".format(promotion.title).encode("utf-8"),
-                    "image": u"{}".format(promotion.image.url).encode("utf-8"),
+                    "image": u"{}{}{}".format("http://", request.get_host(), promotion.image.url).encode("utf-8"),
                     "tag": u"{}".format(promotion.tag).encode("utf-8"),
                     "phone_number": u"{}".format(promotion.phone_number).encode("utf-8"),
                     "text": u"{}".format(promotion.text).encode("utf-8"),
@@ -47,7 +49,7 @@ def get_main_page_values(request):
 
                 "slider": [{
                     "title": u"{}".format(slide.title).encode("utf-8"),
-                    "image": u"{}".format(slide.image.url).encode("utf-8")
+                    "image": u"{}".format("http://", request.get_host(), slide.image.url).encode("utf-8")
                 } for slide in slider]
 
             }
