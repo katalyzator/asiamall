@@ -50,5 +50,5 @@ def get_main_page_values(request):
 
     except:
         return JsonResponse({
-            "Something went wrong"
+            "result": "Something went wrong"
         })
