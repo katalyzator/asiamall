@@ -45,6 +45,7 @@ def get_main_page_values(request):
                     "title": u"{}".format(slide.title).encode("utf-8"),
                     "image": u"{}".format(slide.image.url).encode("utf-8")
                 } for slide in slider]
+
             }
         })
 
