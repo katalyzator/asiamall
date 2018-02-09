@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils import http
 from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Slider
 from news.models import News
 from promotions.models import Promotion
+
+logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
@@ -49,7 +53,10 @@ def get_main_page_values(request):
             }
         })
 
-    except:
+    except Exception as exc:
+
+        logger.error(exc)
+
         return JsonResponse({
-            "result": "Something went wrong"
+            "result": u"{}".format(str(exc))
         })
