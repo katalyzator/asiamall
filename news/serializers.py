@@ -6,4 +6,4 @@ from news.models import News
 class NewsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = News
-        fields = ('id', 'title', 'image', 'text', 'video', 'video_img', 'tag', 'timestamp')
+        fields = ('id', 'title', 'image', 'text', 'video', 'tag', 'timestamp')
