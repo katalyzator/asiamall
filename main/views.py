@@ -40,7 +40,7 @@ def get_main_page_values(request):
                     "tag": u"{}".format(promotion.tag).encode("utf-8"),
                     "phone_number": u"{}".format(promotion.phone_number).encode("utf-8"),
                     "text": u"{}".format(promotion.text).encode("utf-8"),
-                    "timestamp": u"{}".format(promotion.timestamp.strftime('%d-%m-%y')).encode("utf-8")
+                    "timestamp": u"{}".format(promotion.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
                 } for promotion in promotions],
 
