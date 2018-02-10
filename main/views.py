@@ -30,7 +30,7 @@ def get_main_page_values(request):
                         "utf-8") if new.video else None,
                     "tag": u"{}".format(new.tag).encode("utf-8"),
                     "text": u"{}".format(new.text).encode("utf-8"),
-                    "timestamp": u"{}".format(new.timestamp.strftime('%d-%m-%y')).encode("utf-8")
+                    "timestamp": u"{}".format(new.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
                 } for new in news],
 
