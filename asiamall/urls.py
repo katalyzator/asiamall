@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^api/promotion/', include('promotions.urls')),
     url(r'^api/entertainment/', include('entertainments.urls')),
     url(r'^api/food_court/', include('foodcourt.urls')),
+    url(r'^api/service/', include('services.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^documentation/$', schema_view),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

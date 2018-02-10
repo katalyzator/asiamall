@@ -20,7 +20,7 @@ class FoodCourt(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     class Meta:
-        verbose_name_plural = _('Развлечения')
+        verbose_name_plural = _('Фудкорт')
         verbose_name = _('объект')
 
     def __unicode__(self):
