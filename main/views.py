@@ -3,10 +3,7 @@ from __future__ import unicode_literals
 
 import logging
 from django.http import JsonResponse
-from django.shortcuts import render
 
-# Create your views here.
-from django.utils import http
 from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Slider
