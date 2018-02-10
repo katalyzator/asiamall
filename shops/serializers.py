@@ -14,4 +14,4 @@ class ShopSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Shop
-        fields = ('title', 'description', 'full_description', 'time_start', 'time_end', 'image', 'category')
+        fields = ('id', 'title', 'description', 'full_description', 'time_start', 'time_end', 'image', 'category')
