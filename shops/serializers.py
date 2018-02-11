@@ -6,7 +6,7 @@ from shops.models import Shop, Category
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = ('title',)
+        fields = ('id', 'title')
 
 
 class ShopSerializer(serializers.HyperlinkedModelSerializer):
