@@ -62,6 +62,8 @@ class Advertiser(models.Model):
     phone_number1 = models.CharField(max_length=255, verbose_name='Номер телефона №1', blank=True, null=True)
     phone_number2 = models.CharField(max_length=255, verbose_name='Номер телефона №2', blank=True, null=True)
     email = models.EmailField(verbose_name='Email')
+    commercial_file = models.FileField(upload_to='commercial/files', verbose_name='Коммерческое предложение',
+                                       blank=True, null=True)
 
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)

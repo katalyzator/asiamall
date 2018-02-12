@@ -18,4 +18,4 @@ class LesseeSerializer(serializers.HyperlinkedModelSerializer):
 class AdvertiserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Advertiser
-        fields = ('id', 'title', 'phone_number1', 'phone_number2', 'email', 'text', 'timestamp')
+        fields = ('id', 'title', 'phone_number1', 'phone_number2', 'email', 'commercial_file', 'text', 'timestamp')
