@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from entertainments.models import Entertainment
 from foodcourt.models import FoodCourt
 
 

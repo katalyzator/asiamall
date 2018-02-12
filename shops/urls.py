@@ -4,8 +4,8 @@ from rest_framework import routers
 from shops.api import ShopViewSet, CategoryViewSet, ShopListView
 
 router = routers.DefaultRouter()
-router.register(r'shopslist', ShopViewSet)
-router.register(r'categories', CategoryViewSet)
+router.register(r'shopslist', ShopViewSet, base_name='ShopsList')
+router.register(r'categories', CategoryViewSet, base_name='Categories')
 
 
 urlpatterns = [
