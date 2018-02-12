@@ -156,3 +156,8 @@ CKEDITOR_CONFIGS = {
         'width': 800,
     },
 }
+
+JET_DEFAULT_THEME = 'green'
+
+JET_SIDE_MENU_COMPACT = True
+
