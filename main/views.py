@@ -102,6 +102,7 @@ def search_view(request):
                         "time_start": u"{}".format(shop.time_start).encode("utf-8"),
                         "time_end": u"{}".format(shop.time_end).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode("utf-8"),
                         "timestamp": u"{}".format(shop.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
                     } for shop in shops]
 
