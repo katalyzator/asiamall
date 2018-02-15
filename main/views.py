@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import requests
+import json
 import logging
 from django.http import JsonResponse
 
@@ -171,30 +173,20 @@ def get_device_id(request):
                 })
             if device_type == 'ios':
 
-                FCMDevice.objects.create(registration_id=device_token, type=u'ios')
-                fcm = FCMDevice.objects.get(registration_id=device_token)
-
-                if DeviceId.objects.filter(device_id=device_id).exists():
-                    device = DeviceId.objects.get(device_id=device_id)
-                    device.fcm = fcm
-                    device.save()
+                if FCMDevice.objects.filter(device_id=device_id).exists():
+                    fcm = FCMDevice.objects.get(device_id=device_id)
+                    fcm.registration_id = device_token
+                    fcm.save()
                 else:
-                    DeviceId.objects.create(
-                        device_id=device_id, fcm=fcm
-                    )
+                    FCMDevice.objects.create(registration_id=device_token, type=u'ios', device_id=device_id)
 
             elif device_type == 'android':
-                FCMDevice.objects.create(registration_id=device_token, type=u'android')
-                fcm = FCMDevice.objects.get(registration_id=device_token)
-
-                if DeviceId.objects.filter(device_id=device_id).exists():
-                    device = DeviceId.objects.get(device_id=device_id)
-                    device.fcm = fcm
-                    device.save()
+                if FCMDevice.objects.filter(device_id=device_id).exists():
+                    fcm = FCMDevice.objects.get(device_id=device_id)
+                    fcm.registration_id = device_token
+                    fcm.save()
                 else:
-                    DeviceId.objects.create(
-                        device_id=device_id, fcm=fcm
-                    )
+                    FCMDevice.objects.create(registration_id=device_token, type=u'android', device_id=device_id)
 
             else:
                 FCMDevice.objects.create(registration_id=device_id, type=u'web')
@@ -212,3 +204,36 @@ def get_device_id(request):
     return JsonResponse({
         "result": "Request method is 'GET', please try again with 'POST' method"
     })
+
+
+def send_push_notification_with_topic(request):
+    try:
+        data = {
+            "to": "/topics/ASIAMALL",
+            "notification": {
+                "title": "Новость!",
+                "body": "Скидки в Азии Мол",
+                "sound": "default"
+            },
+            "data": {
+                "id": "197299",
+                "type": "news",
+                "name": "Скидки",
+            }
+        }
+
+        data = json.dumps(data)
+        headers = {'Content-Type': 'application/json',
+                   'Authorization': 'key=AAAAPLdqVmU:APA91bHDerDufai1jFHdBmrtZzGrGkD7CPGw1OGTvtj0P9MHoYU3gvOsZUqOPuEhtIo64H53ih-W0yct2W4wYNNBJHqxYaLCmNVZ69UpzJ5m_8dwNWKjt8rMLW015_FtcMKR8eSGgyKS'}
+
+        requests.post('https://fcm.googleapis.com/fcm/send', data=json.dumps(data), headers=headers)
+
+        return JsonResponse({
+            "result": True
+        })
+
+    except Exception as exc:
+        logger.error(exc)
+        return JsonResponse({
+            "result": u"{}".format(str(exc))
+        })
