@@ -119,6 +119,7 @@ def search_view(request):
         })
 
 
+@csrf_exempt
 def post_application(request):
     if request.method == 'POST':
         try:
@@ -155,6 +156,7 @@ def post_application(request):
     })
 
 
+@csrf_exempt
 def get_device_id(request):
     if request.method == 'POST':
         try:
