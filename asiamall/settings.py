@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'ckeditor',
     'ckeditor_uploader',
+    'fcm_django',
 ]
 
 MIDDLEWARE = [
@@ -161,3 +162,6 @@ JET_DEFAULT_THEME = 'green'
 
 JET_SIDE_MENU_COMPACT = True
 
+FCM_DJANGO_SETTINGS = {
+    "FCM_SERVER_KEY": "AAAAStjbllM:APA91bEij6PU3D0_OKp0IVLDpk5CCqyp5XmLOnSI3EFT2srlJpMZNSetCW2DRboA0Eo7hQVq-vgDIePruMhQdWWDGiwR3yntkdmXVEBBZtJh2Fp6BTQve3YbYwVo72Ql1TZDkUIav3Ut",
+}

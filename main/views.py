@@ -5,6 +5,7 @@ import logging
 from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
+from fcm_django.models import FCMDevice
 
 from main.models import Slider, Application
 from news.models import News
@@ -138,6 +139,42 @@ def post_application(request):
                 full_name=full_name, phone=phone, email=email, square=square,
                 type_of_product=type_of_product, brand=brand
             )
+
+            return JsonResponse({
+                "result": True
+            })
+
+        except Exception as exc:
+            logger.error(exc)
+            return JsonResponse({
+                "result": u"{}".format(str(exc))
+            })
+
+    return JsonResponse({
+        "result": "Request method is 'GET', please try again with 'POST' method"
+    })
+
+
+def get_device_id(request):
+    if request.method == 'POST':
+        try:
+            try:
+                device_id = request.POST.get('device_id')
+                device_type = request.POST.get('device_type')
+            except Exception as exc:
+                logger.error(exc)
+                return JsonResponse({
+                    "result": u"{}".format(str(exc))
+                })
+            if str(device_type) == 'ios':
+
+                FCMDevice.objects.create(registration_id=device_id, type=u'ios')
+
+            elif str(device_type) == 'android':
+                FCMDevice.objects.create(registration_id=device_id, type=u'android')
+
+            else:
+                FCMDevice.objects.create(registration_id=device_id, type=u'web')
 
             return JsonResponse({
                 "result": True
