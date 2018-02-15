@@ -169,12 +169,12 @@ def get_device_id(request):
                 return JsonResponse({
                     "result": u"{}".format(str(exc))
                 })
-            if str(device_type) == 'ios':
+            if device_type == 'ios':
 
                 FCMDevice.objects.create(registration_id=device_token, type=u'ios')
                 fcm = FCMDevice.objects.get(registration_id=device_token)
 
-                if DeviceId.objects.get(device_id=device_id):
+                if DeviceId.objects.filter(device_id=device_id).exists():
                     device = DeviceId.objects.get(device_id=device_id)
                     device.fcm = fcm
                     device.save()
@@ -183,11 +183,11 @@ def get_device_id(request):
                         device_id=device_id, fcm=fcm
                     )
 
-            elif str(device_type) == 'android':
+            elif device_type == 'android':
                 FCMDevice.objects.create(registration_id=device_token, type=u'android')
                 fcm = FCMDevice.objects.get(registration_id=device_token)
 
-                if DeviceId.objects.get(device_id=device_id):
+                if DeviceId.objects.filter(device_id=device_id).exists():
                     device = DeviceId.objects.get(device_id=device_id)
                     device.fcm = fcm
                     device.save()
