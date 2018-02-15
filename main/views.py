@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
 
-from main.models import Slider
+from main.models import Slider, Application
 from news.models import News
 from promotions.models import Promotion
 from shops.models import Shop, Category
@@ -102,10 +102,10 @@ def search_view(request):
                         "time_start": u"{}".format(shop.time_start).encode("utf-8"),
                         "time_end": u"{}".format(shop.time_end).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
-                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode("utf-8")) if shop.logo else None,
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
                         "timestamp": u"{}".format(shop.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
                     } for shop in shops]
-
                 }
             })
 
@@ -116,3 +116,39 @@ def search_view(request):
         return JsonResponse({
             "result": u"{}".format(str(exc))
         })
+
+
+def post_application(request):
+    if request.method == 'POST':
+        try:
+            try:
+                full_name = request.POST.get('full_name')
+                phone = request.POST.get('phone')
+                email = request.POST.get('email')
+                square = request.POST.get('square')
+                type_of_product = request.POST.get('type_of_product')
+                brand = request.POST.get('brand')
+            except Exception as exc:
+                logger.error(exc)
+                return JsonResponse({
+                    "result": u"{}".format(str(exc))
+                })
+
+            Application.objects.create(
+                full_name=full_name, phone=phone, email=email, square=square,
+                type_of_product=type_of_product, brand=brand
+            )
+
+            return JsonResponse({
+                "result": True
+            })
+
+        except Exception as exc:
+            logger.error(exc)
+            return JsonResponse({
+                "result": u"{}".format(str(exc))
+            })
+
+    return JsonResponse({
+        "result": "Request method is 'GET', please try again with 'POST' method"
+    })

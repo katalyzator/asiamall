@@ -74,3 +74,19 @@ class Advertiser(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+
+class Application(models.Model):
+    full_name = models.CharField(max_length=255, verbose_name='ФИО')
+    phone = models.CharField(max_length=255, verbose_name='Номер телефона')
+    email = models.EmailField(verbose_name='Email')
+    square = models.CharField(max_length=255, verbose_name='Площадь')
+    type_of_product = models.CharField(max_length=255, verbose_name='Тип товара')
+    brand = models.CharField(max_length=255, verbose_name='Бренд')
+
+    class Meta:
+        verbose_name = 'заявку'
+        verbose_name_plural = 'Заявки на аренду'
+
+    def __unicode__(self):
+        return smart_unicode(self.full_name)
