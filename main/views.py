@@ -208,25 +208,9 @@ def get_device_id(request):
 
 def send_push_notification_with_topic(request):
     try:
-        data = {
-            "to": "/topics/ASIAMALL",
-            "notification": {
-                "title": "Новость!",
-                "body": "Скидки в Азии Мол",
-                "sound": "default"
-            },
-            "data": {
-                "id": "197299",
-                "type": "news",
-                "name": "Скидки",
-            }
-        }
-
-        data = json.dumps(data)
-        headers = {'Content-Type': 'application/json',
-                   'Authorization': 'key=AAAAPLdqVmU:APA91bHDerDufai1jFHdBmrtZzGrGkD7CPGw1OGTvtj0P9MHoYU3gvOsZUqOPuEhtIo64H53ih-W0yct2W4wYNNBJHqxYaLCmNVZ69UpzJ5m_8dwNWKjt8rMLW015_FtcMKR8eSGgyKS'}
-
-        requests.post('https://fcm.googleapis.com/fcm/send', data=json.dumps(data), headers=headers)
+        device = FCMDevice.objects.last()
+        for i in range(1, 100):
+            device.send_message(title="Title", body="Дастих хахахаххахаххах)))))")
 
         return JsonResponse({
             "result": True
