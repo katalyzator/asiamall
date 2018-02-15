@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from main.models import Slider, AboutAsiaMall, Lessee, Advertiser, Application
+from main.models import Slider, AboutAsiaMall, Lessee, Advertiser, Application, DeviceId
 
 
 class AboutAsiaMallAdmin(admin.ModelAdmin):
@@ -38,3 +38,4 @@ admin.site.register(AboutAsiaMall, AboutAsiaMallAdmin)
 admin.site.register(Lessee, LesseeAdmin)
 admin.site.register(Advertiser, AdvertiserAdmin)
 admin.site.register(Application)
+admin.site.register(DeviceId)

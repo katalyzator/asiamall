@@ -6,6 +6,7 @@ from django.db import models
 
 # Create your models here.
 from django.utils.encoding import smart_unicode
+from fcm_django.models import FCMDevice
 
 
 class Slider(models.Model):
@@ -84,9 +85,27 @@ class Application(models.Model):
     type_of_product = models.CharField(max_length=255, verbose_name='Тип товара')
     brand = models.CharField(max_length=255, verbose_name='Бренд')
 
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
     class Meta:
         verbose_name = 'заявку'
         verbose_name_plural = 'Заявки на аренду'
 
     def __unicode__(self):
         return smart_unicode(self.full_name)
+
+
+class DeviceId(models.Model):
+    fcm = models.ForeignKey(FCMDevice, verbose_name='FCM Device', related_name='fcm_token')
+    device_id = models.CharField(max_length=1000, verbose_name='Device_id')
+
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        verbose_name = 'device_id'
+        verbose_name_plural = 'Devices'
+
+    def __unicode__(self):
+        return smart_unicode(self.device_id)

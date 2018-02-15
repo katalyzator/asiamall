@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from fcm_django.models import FCMDevice
 
-from main.models import Slider, Application
+from main.models import Slider, Application, DeviceId
 from news.models import News
 from promotions.models import Promotion
 from shops.models import Shop, Category
@@ -160,6 +160,7 @@ def get_device_id(request):
         try:
             try:
                 device_id = request.POST.get('device_id')
+                device_token = request.POST.get('device_token')
                 device_type = request.POST.get('device_type')
             except Exception as exc:
                 logger.error(exc)
@@ -168,10 +169,30 @@ def get_device_id(request):
                 })
             if str(device_type) == 'ios':
 
-                FCMDevice.objects.create(registration_id=device_id, type=u'ios')
+                FCMDevice.objects.create(registration_id=device_token, type=u'ios')
+                fcm = FCMDevice.objects.get(registration_id=device_token)
+
+                if DeviceId.objects.get(device_id=device_id):
+                    device = DeviceId.objects.get(device_id=device_id)
+                    device.fcm = fcm
+                    device.save()
+                else:
+                    DeviceId.objects.create(
+                        device_id=device_id, fcm=fcm
+                    )
 
             elif str(device_type) == 'android':
-                FCMDevice.objects.create(registration_id=device_id, type=u'android')
+                FCMDevice.objects.create(registration_id=device_token, type=u'android')
+                fcm = FCMDevice.objects.get(registration_id=device_token)
+
+                if DeviceId.objects.get(device_id=device_id):
+                    device = DeviceId.objects.get(device_id=device_id)
+                    device.fcm = fcm
+                    device.save()
+                else:
+                    DeviceId.objects.create(
+                        device_id=device_id, fcm=fcm
+                    )
 
             else:
                 FCMDevice.objects.create(registration_id=device_id, type=u'web')
