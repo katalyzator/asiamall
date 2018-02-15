@@ -21,6 +21,7 @@ class News(models.Model):
     tag = models.CharField(max_length=255, verbose_name='Тэг', choices=NEWS_TAG)
 
     text = RichTextUploadingField(verbose_name='Контент новости')
+    share_url = models.CharField(max_length=1000, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
 
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -31,4 +32,3 @@ class News(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
-

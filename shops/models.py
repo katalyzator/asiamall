@@ -29,6 +29,7 @@ class Shop(models.Model):
     time_end = models.TimeField(blank=True, null=True, verbose_name=_("Время окончание работы"))
     image = models.ImageField(upload_to='images/shops', verbose_name=_("Картинка"))
     logo = models.ImageField(upload_to='images/shops', verbose_name=_("Logotype"), blank=True, null=True)
+    instagram = models.CharField(max_length=255, verbose_name='Instagram', blank=True, null=True)
 
     category = models.ManyToManyField(Category, verbose_name=_("Выберите категорию"), related_name='shop_category',
                                       blank=True)

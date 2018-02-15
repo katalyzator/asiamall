@@ -33,6 +33,7 @@ def get_main_page_values(request):
                     "video": (u"{}{}{}".format("http://", request.get_host(), new.video.url)).encode(
                         "utf-8") if new.video else None,
                     "tag": u"{}".format(new.tag).encode("utf-8"),
+                    "share_url": u"{}".format(new.share_url).encode("utf-8"),
                     "text": u"{}".format(new.text).encode("utf-8"),
                     "timestamp": u"{}".format(new.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
@@ -83,6 +84,7 @@ def search_view(request):
                         "video": (u"{}{}{}".format("http://", request.get_host(), new.video.url)).encode(
                             "utf-8") if new.video else None,
                         "tag": u"{}".format(new.tag).encode("utf-8"),
+                        "share_url": u"{}".format(new.share_url).encode("utf-8"),
                         "text": u"{}".format(new.text).encode("utf-8"),
                         "timestamp": u"{}".format(new.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
@@ -104,6 +106,7 @@ def search_view(request):
                         "full_description": u"{}".format(shop.full_description).encode("utf-8"),
                         "time_start": u"{}".format(shop.time_start).encode("utf-8"),
                         "time_end": u"{}".format(shop.time_end).encode("utf-8"),
+                        "instagram": u"{}".format(shop.instagram).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
