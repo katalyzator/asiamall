@@ -30,6 +30,9 @@ class Shop(models.Model):
     image = models.ImageField(upload_to='images/shops', verbose_name=_("Картинка"))
     logo = models.ImageField(upload_to='images/shops', verbose_name=_("Logotype"), blank=True, null=True)
     instagram = models.CharField(max_length=255, verbose_name='Instagram', blank=True, null=True)
+    facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
+    phone_number = models.CharField(max_length=255, verbose_name='Номер телефона', blank=True, null=True)
+    share_url = models.CharField(max_length=255, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
 
     category = models.ManyToManyField(Category, verbose_name=_("Выберите категорию"), related_name='shop_category',
                                       blank=True)

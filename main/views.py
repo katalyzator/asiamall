@@ -44,6 +44,7 @@ def get_main_page_values(request):
                     "image": u"{}{}{}".format("http://", request.get_host(), promotion.image.url).encode("utf-8"),
                     "tag": u"{}".format(promotion.tag).encode("utf-8"),
                     "phone_number": u"{}".format(promotion.phone_number).encode("utf-8"),
+                    "share_url": u"{}".format(promotion.share_url).encode("utf-8"),
                     "text": u"{}".format(promotion.text).encode("utf-8"),
                     "timestamp": u"{}".format(promotion.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
@@ -107,6 +108,7 @@ def search_view(request):
                         "time_start": u"{}".format(shop.time_start).encode("utf-8"),
                         "time_end": u"{}".format(shop.time_end).encode("utf-8"),
                         "instagram": u"{}".format(shop.instagram).encode("utf-8"),
+                        "facebook": u"{}".format(shop.facebook).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
