@@ -43,7 +43,7 @@ class News(models.Model):
 
     def save(self, *args, **kwargs):
         devices = FCMDevice.objects.all()
-        devices.send_message(title=self.title, body=self.title, icon=self.image.url, sound="default", content_available=True,
+        devices.send_message(title=self.title, body=self.title, icon="http://149.202.123.241" + self.image.url, sound="default",
+                             content_available=True,
                              data={"type": "news", "image": self.image.url}, click_action="news")
-
         super(News, self).save(*args, **kwargs)
