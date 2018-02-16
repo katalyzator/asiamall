@@ -15,5 +15,4 @@ urlpatterns = [
     url(r'^search/$', search_view),
     url(r'^post_application/$', post_application),
     url(r'^post_device_id/$', get_device_id),
-    url(r'^send_push/$', send_push_notification_with_topic),
 ]

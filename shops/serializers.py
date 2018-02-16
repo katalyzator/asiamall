@@ -15,6 +15,7 @@ class ShopSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Shop
         fields = (
-            'id', 'title', 'description', 'full_description', 'time_start', 'time_end', 'phone_number', 'share_url',
+            'id', 'title', 'description', 'full_description', 'like_counts', 'time_start', 'time_end', 'phone_number',
+            'share_url',
             'instagram',
             'image', 'logo', 'category')

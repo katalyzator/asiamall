@@ -5,6 +5,7 @@ from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext as _
 
 from django.db import models
+from fcm_django.models import FCMDevice
 
 
 class Category(models.Model):
@@ -33,6 +34,7 @@ class Shop(models.Model):
     facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
     phone_number = models.CharField(max_length=255, verbose_name='Номер телефона', blank=True, null=True)
     share_url = models.CharField(max_length=255, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
+    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False)
 
     category = models.ManyToManyField(Category, verbose_name=_("Выберите категорию"), related_name='shop_category',
                                       blank=True)
@@ -46,3 +48,24 @@ class Shop(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+
+class ShopLike(models.Model):
+    LIKE_VALUE = (
+        (1, 1),
+        (-1, -1)
+    )
+    shop = models.ForeignKey(Shop)
+    device = models.ForeignKey(FCMDevice)
+
+    value = models.IntegerField(choices=LIKE_VALUE, verbose_name='Значение голоса')
+
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Рейтинг магазинов'
+        verbose_name = 'Объект'
+
+    def __unicode__(self):
+        return smart_unicode(self.device)
