@@ -28,7 +28,8 @@ def like_button_view(request):
             if ShopLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
 
                 shop = Shop.objects.get(id=shop_id)
-                ShopLike.objects.get(shop_id=shop_id, device_id=device_id)
+                shop_like = ShopLike.objects.get(shop_id=shop_id, device_id=device_id)
+                shop_like.value = int(value)
                 like_count = shop.like_counts
                 shop.like_counts = like_count + int(value)
                 shop.save()
@@ -41,7 +42,7 @@ def like_button_view(request):
 
                 shop = Shop.objects.get(id=shop_id)
                 ShopLike.objects.create(shop=shop,
-                                        device=FCMDevice.objects.get(device_id=device_id))
+                                        device=FCMDevice.objects.get(device_id=device_id), value=int(value))
                 like_count = shop.like_counts
                 shop.like_counts = like_count + int(value)
                 shop.save()
