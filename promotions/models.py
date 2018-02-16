@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.encoding import smart_unicode
+from fcm_django.models import FCMDevice
 
 
 class Promotion(models.Model):
@@ -31,3 +32,11 @@ class Promotion(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+    def save(self, *args, **kwargs):
+        devices = FCMDevice.objects.all()
+        devices.send_message(title=self.title, body=self.title, icon=self.image.url, sound="default",
+                             content_available=True,
+                             data={"type": "promotion", "image": self.image.url}, click_action="promotion")
+
+        super(Promotion, self).save(*args, **kwargs)
