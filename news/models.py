@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import urlparse
-
 import re
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models

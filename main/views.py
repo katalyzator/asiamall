@@ -211,3 +211,18 @@ def get_device_id(request):
     })
 
 
+def send_push_notification_with_topic(request):
+    try:
+        device = FCMDevice.objects.last()
+        for i in range(1, 100):
+            device.send_message(title="Title", body="Расул хахахаххахаххах)))))")
+
+        return JsonResponse({
+            "result": True
+        })
+
+    except Exception as exc:
+        logger.error(exc)
+        return JsonResponse({
+            "result": u"{}".format(str(exc))
+        })
