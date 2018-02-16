@@ -35,7 +35,9 @@ class Promotion(models.Model):
 
     def save(self, *args, **kwargs):
         devices = FCMDevice.objects.all()
-        devices.send_message(title=self.title, body=self.title, icon=self.image.url, sound="default",
+        devices.send_message(title=self.title, body=self.title,
+                             icon=u"{}{}".format("http://149.202.123.241", self.image.url).encode("utf-8"),
+                             sound="default",
                              content_available=True,
                              data={"type": "promotion", "image": self.image.url}, click_action="promotion")
 
