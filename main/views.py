@@ -213,9 +213,9 @@ def get_device_id(request):
 
 def send_push_notification_with_topic(request):
     try:
-        device = FCMDevice.objects.last()
+        device = FCMDevice.objects.first()
         for i in range(1, 100):
-            device.send_message(title="Title", body="Дастих хахахаххахаххах)))))")
+            device.send_message(title="Title", body="ТЕма хахахаххахаххах)))))")
 
         return JsonResponse({
             "result": True
