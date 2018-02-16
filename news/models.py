@@ -44,6 +44,6 @@ class News(models.Model):
     def save(self, *args, **kwargs):
         devices = FCMDevice.objects.all()
         devices.send_message(title=self.title, body=clean_html(self.text), sound="default", content_available=True,
-                             priority="high", data={"type": "news"})
+                             data={"type": "news"})
 
         super(News, self).save(*args, **kwargs)
