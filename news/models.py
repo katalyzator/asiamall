@@ -3,9 +3,17 @@ from __future__ import unicode_literals
 
 import urlparse
 
+import re
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.encoding import smart_unicode
+from fcm_django.models import FCMDevice
+
+
+def clean_html(raw_html):
+    clean_r = re.compile('<.*?>')
+    clean_text = re.sub(clean_r, '', raw_html)
+    return clean_text[0:100]
 
 
 class News(models.Model):
@@ -32,3 +40,10 @@ class News(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+    def save(self, *args, **kwargs):
+        devices = FCMDevice.objects.all()
+        devices.send_message(title=self.title, body=clean_html(self.text), sound="default", content_available=True,
+                             priority="high", data={"type": "news"})
+
+        super(News, self).save(*args, **kwargs)

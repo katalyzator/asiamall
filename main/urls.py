@@ -1,8 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
-from main.views import get_main_page_values, search_view, post_application, get_device_id, \
-    send_push_notification_with_topic
+from main.views import get_main_page_values, search_view, post_application, get_device_id
 from main.api import *
 
 router = routers.DefaultRouter()
@@ -16,5 +15,4 @@ urlpatterns = [
     url(r'^search/$', search_view),
     url(r'^post_application/$', post_application),
     url(r'^post_device_id/$', get_device_id),
-    url(r'^send_push/$', send_push_notification_with_topic),
 ]
