@@ -18,7 +18,7 @@ def like_button_view(request):
             try:
                 device_id = request.POST.get('device_id')
                 value = request.POST.get('value', int)
-                shop_id = request.POST.get('shop_id')
+                shop_id = request.POST.get('id')
             except Exception as exc:
                 logger.error(exc)
                 return JsonResponse({
@@ -125,9 +125,9 @@ def detail_shop_view(request):
                 "instagram": u"{}".format(shop.instagram).encode("utf-8"),
                 "is_liked": is_liked,
                 "facebook": u"{}".format(shop.facebook).encode("utf-8"),
-                "like_counts": u"{}".format(shop.like_counts).encode("utf-8"),
+                "like_counts": shop.like_counts,
                 "phone_number": u"{}".format(shop.phone_number).encode("utf-8"),
-                "share_url": u"{}".format(shop.share_url).encode("utf-8"),
+                "share_url": shop.share_url,
                 "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                 "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                     "utf-8")) if shop.logo else None,
