@@ -122,11 +122,11 @@ def detail_shop_view(request):
                 "full_description": u"{}".format(shop.full_description).encode("utf-8"),
                 "time_start": u"{}".format(shop.time_start).encode("utf-8"),
                 "time_end": u"{}".format(shop.time_end).encode("utf-8"),
-                "instagram": u"{}".format(shop.instagram).encode("utf-8"),
+                "instagram": shop.instagram,
                 "is_liked": is_liked,
                 "facebook": shop.facebook,
                 "like_counts": shop.like_counts,
-                "phone_number": u"{}".format(shop.phone_number).encode("utf-8"),
+                "phone_number": shop.phone_number,
                 "share_url": shop.share_url,
                 "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                 "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(

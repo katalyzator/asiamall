@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-# Create your models here.
 from django.utils.encoding import smart_unicode
 from fcm_django.models import FCMDevice
 
@@ -94,18 +93,3 @@ class Application(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.full_name)
-
-
-class DeviceId(models.Model):
-    fcm = models.ForeignKey(FCMDevice, verbose_name='FCM Device', related_name='fcm_token')
-    device_id = models.CharField(max_length=1000, verbose_name='Device_id')
-
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    class Meta:
-        verbose_name = 'device_id'
-        verbose_name_plural = 'Devices'
-
-    def __unicode__(self):
-        return smart_unicode(self.device_id)

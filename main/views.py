@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import requests
-import json
 import logging
 from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
 from fcm_django.models import FCMDevice
 
-from main.models import Slider, Application, DeviceId
+from main.models import Slider, Application
 from news.models import News
 from promotions.models import Promotion
 from shops.models import Shop, Category
