@@ -30,7 +30,7 @@ def detail_service_view(request):
                 "time_end": u"{}".format(shop.time_end).encode("utf-8"),
                 "instagram": u"{}".format(shop.instagram).encode("utf-8"),
                 "is_liked": is_liked,
-                "facebook": u"{}".format(shop.facebook).encode("utf-8"),
+                "facebook": shop.facebook,
                 "like_counts": shop.like_counts,
                 "phone_number": u"{}".format(shop.phone_number).encode("utf-8"),
                 "share_url": shop.share_url,
