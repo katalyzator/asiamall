@@ -17,7 +17,7 @@ class Service(models.Model):
     logo = models.ImageField(upload_to='food_court/logos', verbose_name='Логотип объекта', blank=True, null=True)
     facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
     share_url = models.CharField(max_length=255, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
-
+    instagram = models.CharField(max_length=255, verbose_name='Instagram', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
