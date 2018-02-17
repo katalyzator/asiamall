@@ -33,7 +33,7 @@ def get_main_page_values(request):
                     "video": (u"{}{}{}".format("http://", request.get_host(), new.video.url)).encode(
                         "utf-8") if new.video else None,
                     "tag": u"{}".format(new.tag).encode("utf-8"),
-                    "share_url": u"{}".format(new.share_url).encode("utf-8"),
+                    "share_url": new.share_url,
                     "text": u"{}".format(new.text).encode("utf-8"),
                     "timestamp": u"{}".format(new.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
@@ -44,7 +44,7 @@ def get_main_page_values(request):
                     "image": u"{}{}{}".format("http://", request.get_host(), promotion.image.url).encode("utf-8"),
                     "tag": u"{}".format(promotion.tag).encode("utf-8"),
                     "phone_number": u"{}".format(promotion.phone_number).encode("utf-8"),
-                    "share_url": u"{}".format(promotion.share_url).encode("utf-8"),
+                    "share_url": promotion.share_url,
                     "text": u"{}".format(promotion.text).encode("utf-8"),
                     "timestamp": u"{}".format(promotion.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
 
