@@ -60,3 +60,44 @@ def like_button_view(request):
     return JsonResponse({
         "result": "Request method is 'GET', you must send 'POST' request"
     })
+
+
+def get_liked_shop(request):
+    try:
+        device_id = request.GET.get('device_id')
+
+        if ShopLike.objects.filter(device__device_id=device_id).exists():
+            shops = Shop.objects.filter(shop_likes__device__device_id=device_id)
+
+            return JsonResponse({
+                "result": {
+                    "shops": [{
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "description": u"{}".format(shop.description).encode("utf-8"),
+                        "full_description": u"{}".format(shop.full_description).encode("utf-8"),
+                        "time_start": u"{}".format(shop.time_start).encode("utf-8"),
+                        "time_end": u"{}".format(shop.time_end).encode("utf-8"),
+                        "instagram": u"{}".format(shop.instagram).encode("utf-8"),
+                        "facebook": u"{}".format(shop.facebook).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                        "timestamp": u"{}".format(shop.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
+                    } for shop in shops]
+                }
+            })
+
+        else:
+            return JsonResponse({
+                "result": {
+                    None
+                }
+            })
+
+    except Exception as exc:
+
+        logger.error(exc)
+
+        return JsonResponse({
+            "result": u"{}".format(str(exc))
+        })

@@ -3,6 +3,7 @@ from rest_framework import routers
 
 from main.views import *
 from main.api import *
+from shops.views import get_liked_shop
 
 router = routers.DefaultRouter()
 router.register(r'about', AboutViewSet, base_name='About')
@@ -15,4 +16,5 @@ urlpatterns = [
     url(r'^search/$', search_view),
     url(r'^post_application/$', post_application),
     url(r'^post_device_id/$', get_device_id),
+    url(r'^get_liked_shop/$', get_liked_shop),
 ]

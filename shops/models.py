@@ -55,8 +55,8 @@ class ShopLike(models.Model):
         (1, 1),
         (-1, -1)
     )
-    shop = models.ForeignKey(Shop)
-    device = models.ForeignKey(FCMDevice)
+    shop = models.ForeignKey(Shop, related_name='shop_likes')
+    device = models.ForeignKey(FCMDevice, related_name='device_shop_like')
 
     value = models.IntegerField(choices=LIKE_VALUE, verbose_name='Значение голоса')
 

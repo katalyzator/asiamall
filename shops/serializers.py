@@ -10,12 +10,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ShopSerializer(serializers.HyperlinkedModelSerializer):
-    category = CategorySerializer(many=True, read_only=True)
 
     class Meta:
         model = Shop
-        fields = (
-            'id', 'title', 'description', 'full_description', 'like_counts', 'time_start', 'time_end', 'phone_number',
-            'share_url',
-            'instagram',
-            'image', 'logo', 'category')
+        fields = ('id', 'title', 'image', 'logo')
