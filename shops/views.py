@@ -4,9 +4,11 @@ from __future__ import unicode_literals
 import logging
 
 from django.http import JsonResponse
-from django.shortcuts import render
 from fcm_django.models import FCMDevice
 
+from entertainments.models import EntertainmentLike, Entertainment
+from foodcourt.models import FoodCourtLike, FoodCourt
+from services.models import ServiceLike, Service
 from shops.models import ShopLike, Shop
 
 logger = logging.getLogger(__name__)
@@ -19,37 +21,121 @@ def like_button_view(request):
                 device_id = request.POST.get('device_id')
                 value = request.POST.get('value', int)
                 shop_id = request.POST.get('id')
+                type_of_shop = request.POST.get('type_of_shop')
             except Exception as exc:
                 logger.error(exc)
                 return JsonResponse({
                     "result": u"{}".format(str(exc))
                 })
 
-            if ShopLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+            if type_of_shop == 'shop':
+                if ShopLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
 
-                shop = Shop.objects.get(id=shop_id)
-                shop_like = ShopLike.objects.get(shop_id=shop_id, device_id=device_id)
-                shop_like.value = int(value)
-                like_count = shop.like_counts
-                shop.like_counts = like_count + int(value)
-                shop.save()
+                    shop = Shop.objects.get(id=shop_id)
+                    shop_like = ShopLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like.value = int(value)
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
 
-                return JsonResponse({
-                    "result": True
-                })
+                    return JsonResponse({
+                        "result": True
+                    })
 
-            else:
+                else:
 
-                shop = Shop.objects.get(id=shop_id)
-                ShopLike.objects.create(shop=shop,
-                                        device=FCMDevice.objects.get(device_id=device_id), value=int(value))
-                like_count = shop.like_counts
-                shop.like_counts = like_count + int(value)
-                shop.save()
+                    shop = Shop.objects.get(id=shop_id)
+                    ShopLike.objects.create(shop=shop,
+                                            device=FCMDevice.objects.get(device_id=device_id), value=int(value))
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
 
-                return JsonResponse({
-                    "result": True
-                })
+                    return JsonResponse({
+                        "result": True
+                    })
+
+            elif type_of_shop == 'entertainment':
+                if EntertainmentLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+
+                    shop = Entertainment.objects.get(id=shop_id)
+                    shop_like = EntertainmentLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like.value = int(value)
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
+
+                    return JsonResponse({
+                        "result": True
+                    })
+
+                else:
+
+                    shop = Entertainment.objects.get(id=shop_id)
+                    EntertainmentLike.objects.create(shop=shop,
+                                                     device=FCMDevice.objects.get(device_id=device_id),
+                                                     value=int(value))
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
+
+                    return JsonResponse({
+                        "result": True
+                    })
+
+            elif type_of_shop == 'service':
+                if ServiceLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+
+                    shop = Service.objects.get(id=shop_id)
+                    shop_like = ServiceLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like.value = int(value)
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
+
+                    return JsonResponse({
+                        "result": True
+                    })
+
+                else:
+
+                    shop = Service.objects.get(id=shop_id)
+                    ServiceLike.objects.create(shop=shop,
+                                               device=FCMDevice.objects.get(device_id=device_id), value=int(value))
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
+
+                    return JsonResponse({
+                        "result": True
+                    })
+
+            elif type_of_shop == 'foodcourt':
+                if FoodCourtLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+
+                    shop = FoodCourt.objects.get(id=shop_id)
+                    shop_like = FoodCourtLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like.value = int(value)
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
+
+                    return JsonResponse({
+                        "result": True
+                    })
+
+                else:
+
+                    shop = FoodCourt.objects.get(id=shop_id)
+                    FoodCourtLike.objects.create(shop=shop,
+                                                 device=FCMDevice.objects.get(device_id=device_id), value=int(value))
+                    like_count = shop.like_counts
+                    shop.like_counts = like_count + int(value)
+                    shop.save()
+
+                    return JsonResponse({
+                        "result": True
+                    })
 
         except Exception as exc:
             logger.error(exc)
