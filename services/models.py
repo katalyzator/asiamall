@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext as _
 from django.db import models
+from fcm_django.models import FCMDevice
 
 
 class Service(models.Model):
@@ -18,6 +19,7 @@ class Service(models.Model):
     facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
     share_url = models.CharField(max_length=255, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
     instagram = models.CharField(max_length=255, verbose_name='Instagram', blank=True, null=True)
+    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -27,3 +29,24 @@ class Service(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+
+class ServiceLike(models.Model):
+    LIKE_VALUE = (
+        (1, 1),
+        (-1, -1)
+    )
+    shop = models.ForeignKey(Service, related_name='service_likes')
+    device = models.ForeignKey(FCMDevice, related_name='device_service_like')
+
+    value = models.IntegerField(choices=LIKE_VALUE, verbose_name='Значение голоса')
+
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Рейтинг услуг'
+        verbose_name = 'Объект'
+
+    def __unicode__(self):
+        return smart_unicode(self.device)
