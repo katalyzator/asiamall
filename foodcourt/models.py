@@ -16,7 +16,8 @@ class FoodCourt(models.Model):
     image = models.ImageField(upload_to='images/shops', verbose_name=_("Картинка"))
     phone_number = models.CharField(max_length=255, verbose_name=_("Номер телефона"))
     logo = models.ImageField(upload_to='food_court/logos', verbose_name='Логотип объекта', blank=True, null=True)
-    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False)
+    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False,
+                                      default=0)
     facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
     share_url = models.CharField(max_length=255, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
     instagram = models.CharField(max_length=255, verbose_name='Instagram', blank=True, null=True)

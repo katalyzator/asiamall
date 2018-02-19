@@ -15,7 +15,8 @@ class Entertainment(models.Model):
     time_end = models.TimeField(blank=True, null=True, verbose_name=_("Время окончание работы"))
     image = models.ImageField(upload_to='images/shops', verbose_name=_("Картинка"))
     phone_number = models.CharField(max_length=255, verbose_name=_("Номер телефона"))
-    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False)
+    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False,
+                                      default=0)
 
     logo = models.ImageField(upload_to='entertainments/logos', verbose_name='Логотип объекта', blank=True, null=True)
     facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
