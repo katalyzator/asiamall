@@ -51,7 +51,6 @@ def like_button_view(request):
                     shop = Shop.objects.get(id=shop_id)
                     ShopLike.objects.create(shop=shop,
                                             device=FCMDevice.objects.get(device_id=device_id), value=value)
-                    like_count = shop.like_counts
                     if shop.like_counts is None:
                         like_count = 0
 
