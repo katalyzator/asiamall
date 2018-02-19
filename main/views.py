@@ -100,17 +100,12 @@ def search_view(request):
                     } for promotion in promotions],
 
                     "shops": [{
+                        "id": u"{}".format(shop.id).encode("utf-8"),
                         "title": u"{}".format(shop.title).encode("utf-8"),
-                        "description": u"{}".format(shop.description).encode("utf-8"),
-                        "full_description": u"{}".format(shop.full_description).encode("utf-8"),
-                        "time_start": u"{}".format(shop.time_start).encode("utf-8"),
-                        "time_end": u"{}".format(shop.time_end).encode("utf-8"),
-                        "instagram": u"{}".format(shop.instagram).encode("utf-8"),
-                        "facebook": u"{}".format(shop.facebook).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                        "timestamp": u"{}".format(shop.timestamp.strftime('%Y-%m-%d')).encode("utf-8")
+                        "type_of_shop": "shop",
                     } for shop in shops]
                 }
             })
