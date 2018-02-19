@@ -21,7 +21,7 @@ def like_button_view(request):
         try:
             try:
                 device_id = request.POST.get('device_id')
-                value = request.POST.get('value', int)
+                value = request.POST.get('value')
                 shop_id = request.POST.get('id')
                 type_of_shop = request.POST.get('type_of_shop')
             except Exception as exc:
@@ -35,6 +35,7 @@ def like_button_view(request):
 
                     shop = Shop.objects.get(id=shop_id)
                     shop_like = ShopLike.objects.get(shop_id=shop_id, device__device_id=str(device_id))
+                    value = int(value)
                     shop_like.value = value
                     like_count = shop.like_counts
                     shop.like_counts = like_count + value
