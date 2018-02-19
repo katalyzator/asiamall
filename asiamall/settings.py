@@ -92,6 +92,7 @@ DATABASES = {
         'NAME': 'asiamall',
         'USER': 'asiamall_admin',
         'PASSWORD': '123',
+	'HOST': '*',
     }
 }
 
