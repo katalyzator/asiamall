@@ -34,7 +34,7 @@ class Shop(models.Model):
     facebook = models.CharField(max_length=255, verbose_name='facebook', blank=True, null=True)
     phone_number = models.CharField(max_length=255, verbose_name='Номер телефона', blank=True, null=True)
     share_url = models.CharField(max_length=255, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
-    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False)
+    like_counts = models.IntegerField(verbose_name='Количество лайкой', blank=True, null=True, editable=False, default=0)
 
     category = models.ManyToManyField(Category, verbose_name=_("Выберите категорию"), related_name='shop_category',
                                       blank=True)
