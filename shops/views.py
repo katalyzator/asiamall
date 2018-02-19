@@ -206,6 +206,7 @@ def detail_shop_view(request):
 
         return JsonResponse({
             "result": {
+                "id": u"{}".format(shop.id).encode("utf-8"),
                 "title": u"{}".format(shop.title).encode("utf-8"),
                 "description": u"{}".format(shop.description).encode("utf-8"),
                 "full_description": u"{}".format(shop.full_description).encode("utf-8"),
