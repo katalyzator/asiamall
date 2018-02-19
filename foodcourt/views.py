@@ -17,7 +17,11 @@ def detail_food_court_view(request):
         shop = FoodCourt.objects.get(id=shop_id)
 
         if FoodCourtLike.objects.filter(device__device_id=device_id, shop_id=shop_id).exists():
-            is_liked = True
+            like_value = FoodCourtLike.objects.get(device__device_id=device_id, shop_id=shop_id)
+            if like_value.value == 1:
+                is_liked = True
+            else:
+                is_liked = False
         else:
             is_liked = False
 

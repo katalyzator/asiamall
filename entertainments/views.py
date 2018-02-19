@@ -17,7 +17,11 @@ def detail_entertainment_view(request):
         shop = Entertainment.objects.get(id=shop_id)
 
         if EntertainmentLike.objects.filter(device__device_id=device_id, shop_id=shop_id).exists():
-            is_liked = True
+            like_value = EntertainmentLike.objects.get(device__device_id=device_id, shop_id=shop_id)
+            if like_value.value == 1:
+                is_liked = True
+            else:
+                is_liked = False
         else:
             is_liked = False
 

@@ -200,7 +200,11 @@ def detail_shop_view(request):
         shop = Shop.objects.get(id=shop_id)
 
         if ShopLike.objects.filter(device__device_id=device_id, shop_id=shop_id).exists():
-            is_liked = True
+            like_value = ShopLike.objects.get(device__device_id=device_id, shop_id=shop_id)
+            if like_value.value == 1:
+                is_liked = True
+            else:
+                is_liked = False
         else:
             is_liked = False
 
