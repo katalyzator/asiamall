@@ -5,5 +5,13 @@ from django.contrib import admin
 
 from services.models import Service, ServiceLike
 
-admin.site.register(Service)
+
+class ServiceAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Service
+
+    list_display = ['title', 'like_counts']
+
+
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(ServiceLike)

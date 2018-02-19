@@ -100,7 +100,7 @@ def search_view(request):
                     } for promotion in promotions],
 
                     "shops": [{
-                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "id": shop.id,
                         "title": u"{}".format(shop.title).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
