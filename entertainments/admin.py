@@ -14,5 +14,5 @@ class EntertainmentAdmin(admin.ModelAdmin):
     list_display = ['title', 'like_counts']
 
 
-admin.site.register(Entertainment)
+admin.site.register(Entertainment, EntertainmentAdmin)
 admin.site.register(EntertainmentLike)
