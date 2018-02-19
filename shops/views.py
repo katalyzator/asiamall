@@ -20,8 +20,8 @@ def like_button_view(request):
     if request.method == 'POST':
         try:
             try:
-                device_id = request.POST.get('device_id')
-                value = request.POST.get('value', int)
+                str(device_id) = request.POST.get('device_id')
+                value = request.POST.get('value')
                 shop_id = request.POST.get('id')
                 type_of_shop = request.POST.get('type_of_shop')
             except Exception as exc:
