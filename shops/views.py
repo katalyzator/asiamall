@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import logging
 
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from fcm_django.models import FCMDevice
 
 from entertainments.models import EntertainmentLike, Entertainment
@@ -14,6 +15,7 @@ from shops.models import ShopLike, Shop
 logger = logging.getLogger(__name__)
 
 
+@csrf_exempt
 def like_button_view(request):
     if request.method == 'POST':
         try:
