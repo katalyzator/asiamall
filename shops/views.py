@@ -68,6 +68,7 @@ def like_button_view(request):
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
+                    shop_like.save()
                     shop.save()
 
                     return JsonResponse({
@@ -75,13 +76,14 @@ def like_button_view(request):
                     })
 
                 else:
-
+                    value = int(value)
                     shop = Entertainment.objects.get(id=shop_id)
                     EntertainmentLike.objects.create(shop=shop,
                                                      device=FCMDevice.objects.get(device_id=device_id),
                                                      value=int(value))
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
+
                     shop.save()
 
                     return JsonResponse({
@@ -96,6 +98,7 @@ def like_button_view(request):
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
+                    shop_like.save()
                     shop.save()
 
                     return JsonResponse({
@@ -123,6 +126,7 @@ def like_button_view(request):
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
+                    shop_like.save()
                     shop.save()
 
                     return JsonResponse({
