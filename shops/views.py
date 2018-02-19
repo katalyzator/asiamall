@@ -20,7 +20,7 @@ def like_button_view(request):
     if request.method == 'POST':
         try:
             try:
-                str(device_id) = request.POST.get('device_id')
+                device_id = request.POST.get('device_id')
                 value = request.POST.get('value')
                 shop_id = request.POST.get('id')
                 type_of_shop = request.POST.get('type_of_shop')
@@ -31,10 +31,10 @@ def like_button_view(request):
                 })
 
             if type_of_shop == 'shop':
-                if ShopLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+                if ShopLike.objects.filter(shop_id=shop_id, device__device_id=str(device_id)).exists():
 
                     shop = Shop.objects.get(id=shop_id)
-                    shop_like = ShopLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like = ShopLike.objects.get(shop_id=shop_id, device__device_id=str(device_id))
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
@@ -58,10 +58,10 @@ def like_button_view(request):
                     })
 
             elif type_of_shop == 'entertainment':
-                if EntertainmentLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+                if EntertainmentLike.objects.filter(shop_id=shop_id, device__device_id=device_id).exists():
 
                     shop = Entertainment.objects.get(id=shop_id)
-                    shop_like = EntertainmentLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like = EntertainmentLike.objects.get(shop_id=shop_id, device__device_id=device_id)
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
@@ -86,10 +86,10 @@ def like_button_view(request):
                     })
 
             elif type_of_shop == 'service':
-                if ServiceLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+                if ServiceLike.objects.filter(shop_id=shop_id, device__device_id=device_id).exists():
 
                     shop = Service.objects.get(id=shop_id)
-                    shop_like = ServiceLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like = ServiceLike.objects.get(shop_id=shop_id, device__device_id=device_id)
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
@@ -113,10 +113,10 @@ def like_button_view(request):
                     })
 
             elif type_of_shop == 'foodcourt':
-                if FoodCourtLike.objects.filter(shop_id=shop_id, device_id=device_id).exists():
+                if FoodCourtLike.objects.filter(shop_id=shop_id, device__device_id=device_id).exists():
 
                     shop = FoodCourt.objects.get(id=shop_id)
-                    shop_like = FoodCourtLike.objects.get(shop_id=shop_id, device_id=device_id)
+                    shop_like = FoodCourtLike.objects.get(shop_id=shop_id, device__device_id=device_id)
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
