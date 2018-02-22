@@ -10,7 +10,7 @@ from fcm_django.models import FCMDevice
 from main.models import Slider, Application
 from news.models import News
 from promotions.models import Promotion
-from shops.models import Shop, Category
+from shops.models import Shop
 
 logger = logging.getLogger(__name__)
 
