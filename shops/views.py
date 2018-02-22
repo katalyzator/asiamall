@@ -157,6 +157,7 @@ def like_button_view(request):
     })
 
 
+@csrf_exempt
 def get_liked_shop(request):
     try:
         device_id = request.GET.get('device_id')
