@@ -10,7 +10,7 @@ from fcm_django.models import FCMDevice
 from entertainments.models import EntertainmentLike, Entertainment
 from foodcourt.models import FoodCourtLike, FoodCourt
 from services.models import ServiceLike, Service
-from shops.models import ShopLike, Shop
+from .models import *
 
 logger = logging.getLogger(__name__)
 
@@ -162,22 +162,74 @@ def get_liked_shop(request):
     try:
         device_id = request.GET.get('device_id')
 
-        if ShopLike.objects.filter(device__device_id=device_id).exists():
-            shops = Shop.objects.filter(shop_likes__device__device_id=device_id)
+        try:
+
+            if ShopLike.objects.filter(device__device_id=device_id).exists():
+                shops = Shop.objects.filter(shop_likes__device__device_id=device_id)
+
+            else:
+                shops = None
+
+            if ServiceLike.objects.filter(device__device_id=device_id).exists():
+                services = Service.objects.filter(shop_likes__device__device_id=device_id)
+
+            else:
+                services = None
+
+            if FoodCourtLike.objects.filter(device__device_id=device_id).exists():
+                food_courts = FoodCourt.objects.filter(shop_likes__device__device_id=device_id)
+
+            else:
+                food_courts = None
+
+            if EntertainmentLike.objects.filter(device__device_id=device_id).exists():
+                entertainments = Entertainment.objects.filter(shop_likes__device__device_id=device_id)
+
+            else:
+                entertainments = None
 
             return JsonResponse({
                 "result": {
                     "shops": [{
                         "id": u"{}".format(shop.id).encode("utf-8"),
+                        "type_of_shop": "shop",
                         "title": u"{}".format(shop.title).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                    } for shop in shops]
+                    } for shop in shops if shops is not None],
+
+                    "services": [{
+                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "type_of_shop": "service",
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                    } for shop in services if services is not None],
+
+                    "food_courts": [{
+                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "type_of_shop": "foodcourt",
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                    } for shop in food_courts if food_courts is not None],
+
+                    "entertainments": [{
+                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "type_of_shop": "entertainment",
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                    } for shop in entertainments if entertainments is not None],
+
                 }
             })
 
-        else:
+        except:
             return JsonResponse({
                 "result": {
                     None
