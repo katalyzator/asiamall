@@ -197,7 +197,7 @@ def get_liked_shop(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                    } for shop in shops if shops is not None],
+                    } for shop in shops] if shops else None,
 
                     "services": [{
                         "id": u"{}".format(shop.id).encode("utf-8"),
@@ -206,7 +206,7 @@ def get_liked_shop(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                    } for shop in services if services is not None],
+                    } for shop in services] if services else  None,
 
                     "food_courts": [{
                         "id": u"{}".format(shop.id).encode("utf-8"),
@@ -215,7 +215,7 @@ def get_liked_shop(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                    } for shop in food_courts if food_courts is not None],
+                    } for shop in food_courts] if food_courts else None,
 
                     "entertainments": [{
                         "id": u"{}".format(shop.id).encode("utf-8"),
@@ -224,16 +224,20 @@ def get_liked_shop(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                    } for shop in entertainments if entertainments is not None],
+                    } for shop in entertainments] if entertainments else  None,
 
                 }
             })
 
-        except:
+
+        except Exception as exc:
+
+            logger.error(exc)
+
             return JsonResponse({
-                "result": {
-                    None
-                }
+
+                "result": u"{}".format(str(exc))
+
             })
 
     except Exception as exc:
