@@ -171,19 +171,19 @@ def get_liked_shop(request):
                 shops = None
 
             if ServiceLike.objects.filter(device__device_id=device_id).exists():
-                services = Service.objects.filter(shop_likes__device__device_id=device_id)
+                services = Service.objects.filter(service_likes__device__device_id=device_id)
 
             else:
                 services = None
 
             if FoodCourtLike.objects.filter(device__device_id=device_id).exists():
-                food_courts = FoodCourt.objects.filter(shop_likes__device__device_id=device_id)
+                food_courts = FoodCourt.objects.filter(foodcourt_likes__device__device_id=device_id)
 
             else:
                 food_courts = None
 
             if EntertainmentLike.objects.filter(device__device_id=device_id).exists():
-                entertainments = Entertainment.objects.filter(shop_likes__device__device_id=device_id)
+                entertainments = Entertainment.objects.filter(entertainment_likes__device__device_id=device_id)
 
             else:
                 entertainments = None
