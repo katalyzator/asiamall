@@ -4,10 +4,12 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 # Register your models here.
+from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
+
 from foodcourt.models import FoodCourt, FoodCourtLike
 
 
-class FoodCourtAdmin(admin.ModelAdmin):
+class FoodCourtAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = FoodCourt
 
