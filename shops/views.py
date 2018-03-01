@@ -5,7 +5,6 @@ import logging
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from fcm_django.models import FCMDevice
 
 from entertainments.models import EntertainmentLike, Entertainment
 from foodcourt.models import FoodCourtLike, FoodCourt
@@ -126,7 +125,7 @@ def like_button_view(request):
                     shop_like.value = int(value)
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
-                    shop_like.save()
+                    shop_like.delete()
                     shop.save()
 
                     return JsonResponse({
@@ -191,7 +190,7 @@ def get_liked_shop(request):
             return JsonResponse({
                 "result": {
                     "shops": [{
-                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "id": shop.id,
                         "type_of_shop": "shop",
                         "title": u"{}".format(shop.title).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
@@ -200,7 +199,7 @@ def get_liked_shop(request):
                     } for shop in shops] if shops else None,
 
                     "services": [{
-                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "id": shop.id,
                         "type_of_shop": "service",
                         "title": u"{}".format(shop.title).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
@@ -209,7 +208,7 @@ def get_liked_shop(request):
                     } for shop in services] if services else  None,
 
                     "food_courts": [{
-                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "id": shop.id,
                         "type_of_shop": "foodcourt",
                         "title": u"{}".format(shop.title).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
@@ -218,7 +217,7 @@ def get_liked_shop(request):
                     } for shop in food_courts] if food_courts else None,
 
                     "entertainments": [{
-                        "id": u"{}".format(shop.id).encode("utf-8"),
+                        "id": shop.id,
                         "type_of_shop": "entertainment",
                         "title": u"{}".format(shop.title).encode("utf-8"),
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
@@ -228,7 +227,6 @@ def get_liked_shop(request):
 
                 }
             })
-
 
         except Exception as exc:
 
