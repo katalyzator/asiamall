@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from services.models import Service, ServiceLike
 
 
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = Service
 
