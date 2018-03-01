@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 from shops.models import Shop, Category, ShopLike
 
 
-class ShopAdmin(admin.ModelAdmin):
+class ShopAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = Shop
 
