@@ -4,9 +4,10 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 from entertainments.models import Entertainment, EntertainmentLike
+from modeltranslation.admin import TabbedExternalJqueryTranslationAdmin
 
 
-class EntertainmentAdmin(admin.ModelAdmin):
+class EntertainmentAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = Entertainment
 

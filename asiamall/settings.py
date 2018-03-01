@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for asiamall project.
 
@@ -13,6 +14,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf import global_settings
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'jet.dashboard',
     'jet',
     'django.contrib.admin',
@@ -54,12 +58,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'solid_i18n.middleware.SolidLocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'asiamall.urls'
@@ -119,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 
@@ -168,3 +174,30 @@ JET_SIDE_MENU_COMPACT = True
 FCM_DJANGO_SETTINGS = {
     "FCM_SERVER_KEY": "AAAAPLdqVmU:APA91bHDerDufai1jFHdBmrtZzGrGkD7CPGw1OGTvtj0P9MHoYU3gvOsZUqOPuEhtIo64H53ih-W0yct2W4wYNNBJHqxYaLCmNVZ69UpzJ5m_8dwNWKjt8rMLW015_FtcMKR8eSGgyKS",
 }
+
+gettext_noop = lambda s: s
+
+LANGUAGES = (
+    ('ru', 'Русский'),
+    ('en', 'Английский'),
+    ('kg', gettext_noop('Kyrgyz')),
+)
+
+EXTRA_LANG_INFO = {
+    'kg': {
+        'bidi': False,  # right-to-left
+        'code': 'kg',
+        'name': 'Kyrgyz',
+        'name_local': u'Кыргыз',  # unicode codepoints here
+    },
+}
+
+import django.conf.locale
+
+LANG_INFO = dict(django.conf.locale.LANG_INFO.items() + EXTRA_LANG_INFO.items())
+django.conf.locale.LANG_INFO = LANG_INFO
+
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
