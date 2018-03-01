@@ -11,7 +11,7 @@ class ShopAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = Shop
 
-    list_display = ['title', 'like_counts']
+    list_display = ['title_ru', 'like_counts']
 
 
 admin.site.register(Shop, ShopAdmin)
