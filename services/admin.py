@@ -11,7 +11,7 @@ class ServiceAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = Service
 
-    list_display = ['title', 'like_counts']
+    list_display = ['id', 'title', 'like_counts']
 
 
 admin.site.register(Service, ServiceAdmin)

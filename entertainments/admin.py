@@ -11,7 +11,7 @@ class EntertainmentAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = Entertainment
 
-    list_display = ['title', 'like_counts']
+    list_display = ['id', 'title', 'like_counts']
 
 
 admin.site.register(Entertainment, EntertainmentAdmin)

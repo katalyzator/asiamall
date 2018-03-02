@@ -13,7 +13,7 @@ class FoodCourtAdmin(TabbedExternalJqueryTranslationAdmin):
     class Meta:
         model = FoodCourt
 
-    list_display = ['title', 'like_counts']
+    list_display = ['id', 'title', 'like_counts']
 
 
 admin.site.register(FoodCourt, FoodCourtAdmin)
