@@ -51,11 +51,11 @@ class News(models.Model):
     def __unicode__(self):
         return smart_unicode(self.title)
 
-    def save(self, *args, **kwargs):
-        devices = FCMDevice.objects.all()
-        devices.send_message(title=self.title, body=self.title, icon="http://149.202.123.241" + self.image.url,
-                             sound="default",
-                             content_available=True,
-                             data={"type": "news", "image": "http://149.202.123.241" + self.image.url},
-                             click_action="news")
-        super(News, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     devices = FCMDevice.objects.all()
+    #     devices.send_message(title=self.title, body=self.title, icon="http://149.202.123.241" + self.image.url,
+    #                          sound="default",
+    #                          content_available=True,
+    #                          data={"type": "news", "image": "http://149.202.123.241" + self.image.url},
+    #                          click_action="news")
+    #     super(News, self).save(*args, **kwargs)
