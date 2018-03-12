@@ -29,10 +29,16 @@ class Tag(models.Model):
 
 
 class News(models.Model):
+    NEWS_TAG = (
+        ('Актуально', 'Актуально'),
+        ('Горячее', 'Горячее'),
+        ('Оповещение', 'Оповещение')
+    )
+
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости', blank=True, null=True)
     video = models.FileField(verbose_name='Видео', blank=True, null=True)
-    tag = models.ForeignKey(Tag, verbose_name='Тип новости', blank=True, null=True)
+    tag = models.CharField(max_length=255, verbose_name='Тэг', choices=NEWS_TAG, blank=True, null=True)
 
     text = RichTextUploadingField(verbose_name='Контент новости')
     share_url = models.CharField(max_length=1000, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
