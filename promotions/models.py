@@ -9,7 +9,7 @@ from fcm_django.models import FCMDevice
 
 class Promotion(models.Model):
     PROMOTION_TAG = (
-        ('Актульно', 'Актульно'),
+        ('Актуально', 'Актуально'),
         ('Горячее', 'Горячее'),
         ('Оповещение', 'Оповещение')
     )

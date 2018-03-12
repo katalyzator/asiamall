@@ -1,4 +1,3 @@
-
 from modeltranslation.translator import TranslationOptions, translator
 
 from entertainments.models import Entertainment

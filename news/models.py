@@ -14,17 +14,25 @@ def clean_html(raw_html):
     return clean_text[0:100]
 
 
-class News(models.Model):
-    NEWS_TAG = (
-        ('Актуально', 'Актуально'),
-        ('Горячее', 'Горячее'),
-        ('Оповещение', 'Оповещение')
-    )
+class Tag(models.Model):
+    title = models.CharField(max_length=255, verbose_name='Название')
 
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Тэги'
+        verbose_name = 'Тэг'
+
+    def __unicode__(self):
+        return smart_unicode(self.title)
+
+
+class News(models.Model):
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости', blank=True, null=True)
     video = models.FileField(verbose_name='Видео', blank=True, null=True)
-    tag = models.CharField(max_length=255, verbose_name='Тэг', choices=NEWS_TAG)
+    tag = models.ForeignKey(Tag, verbose_name='Тип новости', blank=True, null=True)
 
     text = RichTextUploadingField(verbose_name='Контент новости')
     share_url = models.CharField(max_length=1000, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
