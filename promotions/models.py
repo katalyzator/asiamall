@@ -17,7 +17,7 @@ class Promotion(models.Model):
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='promotions/images', verbose_name='Главная картинка акции', blank=True,
                               null=True)
-    tag = models.CharField(max_length=255, verbose_name='Тэг', choices=PROMOTION_TAG)
+    tag = models.CharField(max_length=255, verbose_name='Тэг', choices=PROMOTION_TAG, blank=True, null=True)
     phone_number = models.CharField(max_length=255, verbose_name='Номер телефона')
     share_url = models.CharField(max_length=1000, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
 
@@ -39,6 +39,7 @@ class Promotion(models.Model):
                              icon="http://149.202.123.241" + self.image.url,
                              sound="default",
                              content_available=True,
-                             data={"type": "promotion", "image": "http://149.202.123.241" + self.image.url}, click_action="promotion")
+                             data={"type": "promotion", "image": "http://149.202.123.241" + self.image.url},
+                             click_action="promotion")
 
         super(Promotion, self).save(*args, **kwargs)
