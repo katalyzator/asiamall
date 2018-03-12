@@ -9,9 +9,9 @@ from fcm_django.models import FCMDevice
 
 class Promotion(models.Model):
     PROMOTION_TAG = (
-        ('Актуально', 'Актуально'),
-        ('Горячее', 'Горячее'),
-        ('Оповещение', 'Оповещение')
+        (u'Актуально', u'Актуально'),
+        (u'Горячее', u'Горячее'),
+        (u'Оповещение', u'Оповещение')
     )
 
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
