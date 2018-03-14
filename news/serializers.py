@@ -1,9 +1,17 @@
 from rest_framework import serializers
 
-from news.models import News
+from news.models import News, Tag
+
+
+class TagSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('title',)
 
 
 class NewsSerializer(serializers.HyperlinkedModelSerializer):
+    tag = TagSerializer(many=False, read_only=True)
+
     class Meta:
         model = News
         fields = ('id', 'title', 'image', 'text', 'video', 'tag', 'share_url', 'timestamp')
