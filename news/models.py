@@ -29,11 +29,6 @@ class Tag(models.Model):
 
 
 class News(models.Model):
-    PROMOTION_TAG = (
-        (u'Актуально', u'Актуально'),
-        (u'Горячее', u'Горячее'),
-        (u'Оповещение', u'Оповещение')
-    )
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости', blank=True, null=True)
     video = models.FileField(verbose_name='Видео', blank=True, null=True)

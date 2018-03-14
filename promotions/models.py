@@ -10,12 +10,6 @@ from news.models import Tag
 
 
 class Promotion(models.Model):
-    PROMOTION_TAG = (
-        (u'Актуально', u'Актуально'),
-        (u'Горячее', u'Горячее'),
-        (u'Оповещение', u'Оповещение')
-    )
-
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='promotions/images', verbose_name='Главная картинка акции', blank=True,
                               null=True)
