@@ -95,8 +95,8 @@ WSGI_APPLICATION = 'asiamall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'asiamall',
-        'USER': 'asiamall_admin',
+        'NAME': 'asia_db',
+        'USER': 'asia_root',
         'PASSWORD': '123',
         'HOST': '*',
     }
