@@ -42,6 +42,7 @@ class News(models.Model):
     class Meta:
         verbose_name_plural = 'Раздел новостей'
         verbose_name = 'Новость'
+        ordering = ['-timestamp']
 
     def __unicode__(self):
         return smart_unicode(self.title)
