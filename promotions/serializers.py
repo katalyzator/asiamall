@@ -5,7 +5,7 @@ from promotions.models import Promotion
 
 
 class PromotionSerializer(serializers.ModelSerializer):
-    tag_name = serializers.RelatedField(source='tag', read_only=True)
+    tag_name = serializers.CharField(source='tag.title', read_only=True)
 
     class Meta:
         model = Promotion
