@@ -5,8 +5,8 @@ from promotions.models import Promotion
 
 
 class PromotionSerializer(serializers.ModelSerializer):
-    tag_name = serializers.CharField(source='tag.title', read_only=True)
+    tag = serializers.CharField(source='tag.title', read_only=True)
 
     class Meta:
         model = Promotion
-        fields = ('id', 'title', 'image', 'phone_number', 'text', 'share_url', 'tag_name', 'timestamp')
+        fields = ('id', 'title', 'image', 'phone_number', 'text', 'share_url', 'tag', 'timestamp')
