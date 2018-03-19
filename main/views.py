@@ -7,9 +7,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from fcm_django.models import FCMDevice
 
+from entertainments.models import Entertainment
+from foodcourt.models import FoodCourt
 from main.models import Slider, Application
 from news.models import News
 from promotions.models import Promotion
+from services.models import Service
 from shops.models import Shop
 
 logger = logging.getLogger(__name__)
@@ -73,6 +76,9 @@ def search_view(request):
             shops = Shop.objects.filter(full_description__icontains=q)
             news = News.objects.filter(title__icontains=q)
             promotions = Promotion.objects.filter(title__icontains=q)
+            service = Service.objects.filter(title__icontains=q)
+            foodcourt = FoodCourt.objects.filter(title__icontains=q)
+            entertainments = Entertainment.objects.filter(title__icontains=q)
 
             return JsonResponse({
                 "result": {
@@ -106,7 +112,35 @@ def search_view(request):
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
                         "type_of_shop": "shop",
-                    } for shop in shops]
+                    } for shop in shops],
+
+                    "entertainments": [{
+                        "id": shop.id,
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                        "type_of_shop": "shop",
+                    } for shop in entertainments],
+
+                    "services": [{
+                        "id": shop.id,
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                        "type_of_shop": "shop",
+                    } for shop in service],
+
+                    "food_courts": [{
+                        "id": shop.id,
+                        "title": u"{}".format(shop.title).encode("utf-8"),
+                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
+                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
+                            "utf-8")) if shop.logo else None,
+                        "type_of_shop": "shop",
+                    } for shop in foodcourt],
+
                 }
             })
 
