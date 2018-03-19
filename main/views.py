@@ -120,7 +120,7 @@ def search_view(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                        "type_of_shop": "shop",
+                        "type_of_shop": "entertainment",
                     } for shop in entertainments],
 
                     "services": [{
@@ -129,7 +129,7 @@ def search_view(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                        "type_of_shop": "shop",
+                        "type_of_shop": "service",
                     } for shop in service],
 
                     "food_courts": [{
@@ -138,7 +138,7 @@ def search_view(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                        "type_of_shop": "shop",
+                        "type_of_shop": "foodcourt",
                     } for shop in foodcourt],
 
                 }
