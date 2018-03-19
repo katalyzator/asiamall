@@ -10,8 +10,8 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class NewsSerializer(serializers.HyperlinkedModelSerializer):
-    tag = TagSerializer(many=False, read_only=True)
+    tag_name = serializers.RelatedField(source='tag', read_only=True)
 
     class Meta:
         model = News
-        fields = ('id', 'title', 'image', 'text', 'video', 'tag', 'share_url', 'timestamp')
+        fields = ('id', 'title', 'image', 'text', 'video', 'tag_name', 'share_url', 'timestamp')

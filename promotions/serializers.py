@@ -5,8 +5,8 @@ from promotions.models import Promotion
 
 
 class PromotionSerializer(serializers.HyperlinkedModelSerializer):
-    tag = TagSerializer(many=False, read_only=True)
+    tag_name = serializers.RelatedField(source='tag', read_only=True)
 
     class Meta:
         model = Promotion
-        fields = ('id', 'title', 'image', 'phone_number', 'text', 'share_url', 'tag', 'timestamp')
+        fields = ('id', 'title', 'image', 'phone_number', 'text', 'share_url', 'tag_name', 'timestamp')
