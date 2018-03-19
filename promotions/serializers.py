@@ -4,7 +4,7 @@ from news.serializers import TagSerializer
 from promotions.models import Promotion
 
 
-class PromotionSerializer(serializers.HyperlinkedModelSerializer):
+class PromotionSerializer(serializers.ModelSerializer):
     tag_name = serializers.RelatedField(source='tag', read_only=True)
 
     class Meta:

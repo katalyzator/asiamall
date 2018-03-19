@@ -9,7 +9,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('title',)
 
 
-class NewsSerializer(serializers.HyperlinkedModelSerializer):
+class NewsSerializer(serializers.ModelSerializer):
     tag_name = serializers.RelatedField(source='tag', read_only=True)
 
     class Meta:
