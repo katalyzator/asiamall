@@ -71,6 +71,7 @@ def get_main_page_values(request):
 def search_view(request):
     try:
         q = request.GET.get('value')
+        shops = []
 
         if q:
             shops = Shop.objects.filter(full_description__icontains=q)
@@ -79,6 +80,8 @@ def search_view(request):
             service = Service.objects.filter(title__icontains=q)
             foodcourt = FoodCourt.objects.filter(title__icontains=q)
             entertainments = Entertainment.objects.filter(title__icontains=q)
+            # shops.append(news)
+            shops.append(promotions)
 
             return JsonResponse({
                 "result": {
