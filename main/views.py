@@ -82,8 +82,6 @@ def search_view(request):
             service = Service.objects.filter(title__icontains=q)
             foodcourt = FoodCourt.objects.filter(title__icontains=q)
             entertainments = Entertainment.objects.filter(title__icontains=q)
-            # shops.append(news)
-            shops.append(promotions)
             shops_result = list(chain(shops, service, foodcourt, entertainments))
 
             return JsonResponse({
