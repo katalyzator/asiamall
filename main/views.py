@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import logging
+from itertools import chain
+
 from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
@@ -82,6 +84,7 @@ def search_view(request):
             entertainments = Entertainment.objects.filter(title__icontains=q)
             # shops.append(news)
             shops.append(promotions)
+            shops_result = list(chain(shops, service, foodcourt, entertainments))
 
             return JsonResponse({
                 "result": {
@@ -115,34 +118,7 @@ def search_view(request):
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
                         "type_of_shop": "shop",
-                    } for shop in shops],
-
-                    "entertainments": [{
-                        "id": shop.id,
-                        "title": u"{}".format(shop.title).encode("utf-8"),
-                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
-                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
-                            "utf-8")) if shop.logo else None,
-                        "type_of_shop": "entertainment",
-                    } for shop in entertainments],
-
-                    "services": [{
-                        "id": shop.id,
-                        "title": u"{}".format(shop.title).encode("utf-8"),
-                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
-                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
-                            "utf-8")) if shop.logo else None,
-                        "type_of_shop": "service",
-                    } for shop in service],
-
-                    "food_courts": [{
-                        "id": shop.id,
-                        "title": u"{}".format(shop.title).encode("utf-8"),
-                        "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
-                        "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
-                            "utf-8")) if shop.logo else None,
-                        "type_of_shop": "foodcourt",
-                    } for shop in foodcourt],
+                    } for shop in shops_result],
 
                 }
             })
