@@ -6,6 +6,7 @@ from promotions.models import Promotion
 
 class PromotionSerializer(serializers.ModelSerializer):
     tag = serializers.CharField(source='tag.title', read_only=True)
+    timestamp = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
         model = Promotion
