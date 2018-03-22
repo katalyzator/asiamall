@@ -36,7 +36,7 @@ def like_button_view(request):
                     shop_like = ShopLike.objects.get(shop_id=shop_id, device__device_id=str(device_id))
                     value = int(value)
                     shop_like.value = value
-                    shop_like.save()
+                    shop_like.delete()
                     like_count = shop.like_counts
                     shop.like_counts = like_count + value
                     shop.save()
@@ -65,9 +65,9 @@ def like_button_view(request):
                     shop = Entertainment.objects.get(id=shop_id)
                     shop_like = EntertainmentLike.objects.get(shop_id=shop_id, device__device_id=device_id)
                     shop_like.value = int(value)
+                    shop_like.delete()
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
-                    shop_like.save()
                     shop.save()
 
                     return JsonResponse({
@@ -95,9 +95,9 @@ def like_button_view(request):
                     shop = Service.objects.get(id=shop_id)
                     shop_like = ServiceLike.objects.get(shop_id=shop_id, device__device_id=device_id)
                     shop_like.value = int(value)
+                    shop_like.delete()
                     like_count = shop.like_counts
                     shop.like_counts = like_count + int(value)
-                    shop_like.save()
                     shop.save()
 
                     return JsonResponse({
