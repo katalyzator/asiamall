@@ -11,6 +11,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 class NewsSerializer(serializers.ModelSerializer):
     tag = serializers.CharField(source='tag.title', read_only=True)
+    timestamp = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
         model = News
