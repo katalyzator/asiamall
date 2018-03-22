@@ -115,7 +115,7 @@ def search_view(request):
                         "image": u"{}{}{}".format("http://", request.get_host(), shop.image.url).encode("utf-8"),
                         "logo": (u"{}{}{}".format("http://", request.get_host(), shop.logo.url).encode(
                             "utf-8")) if shop.logo else None,
-                        "type_of_shop": "shop",
+                        "type_of_shop": "shop" if shop.__class__.__name__ == 'Shop' else "service" if shop.__class__.__name__ == 'Service' else "foodcourt" if shop.__class__.__name__ == 'FoodCourt' else "entertainment" if shop.__class__.__name__ == 'Entertainment' else 'shop',
                     } for shop in shops_result],
 
                 }
