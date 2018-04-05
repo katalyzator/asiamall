@@ -32,7 +32,7 @@ class News(models.Model):
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='news/images', verbose_name='Главная картинка новости', blank=True, null=True)
     video = models.FileField(verbose_name='Видео', blank=True, null=True)
-    tag = models.ForeignKey(Tag, blank=True, null=True, verbose_name='Tags')
+    tag = models.ForeignKey(Tag, verbose_name='Tags')
     text = RichTextUploadingField(verbose_name='Контент новости')
     share_url = models.CharField(max_length=1000, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
 

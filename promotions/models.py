@@ -13,7 +13,7 @@ class Promotion(models.Model):
     title = models.CharField(max_length=1000, verbose_name='Заголовок')
     image = models.ImageField(upload_to='promotions/images', verbose_name='Главная картинка акции', blank=True,
                               null=True)
-    tag = models.ForeignKey(Tag, blank=True, null=True, verbose_name='Tags')
+    tag = models.ForeignKey(Tag, verbose_name='Tags')
     phone_number = models.CharField(max_length=255, verbose_name='Номер телефона')
     share_url = models.CharField(max_length=1000, verbose_name='Ссылка для кнопки поделиться', blank=True, null=True)
 
