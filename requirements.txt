@@ -33,4 +33,4 @@ simplejson==3.13.2
 six==1.11.0
 solid-i18n==1.4.1
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.26.5
